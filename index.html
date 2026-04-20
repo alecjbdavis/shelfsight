@@ -3,24 +3,52 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Shelfsight — Competitor intelligence for UK independent beauty brands</title>
-<meta name="description" content="Shelfsight watches every product, price, review and stockout across your rival UK beauty brands — and tells you what to do about it, every morning before you open the shop." />
 
+<!-- ==================== SEO / META ==================== -->
+<title>Shelfsight — The morning brief for indie beauty</title>
+<meta name="description" content="Daily intelligence on every launch, stockout, review spike, and marketing move across the brands you watch. For independent beauty founders on Shopify." />
+<meta name="robots" content="index, follow" />
+<meta name="author" content="Shelfsight" />
+<link rel="canonical" href="https://shelfsight.io" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://shelfsight.io" />
+<meta property="og:title" content="Shelfsight — The morning brief for indie beauty" />
+<meta property="og:description" content="Every launch, stockout, review spike and marketing move — across the brands you watch, in one morning brief. Built for independent beauty founders." />
+<meta property="og:image" content="https://shelfsight.io/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Shelfsight — The morning brief for indie beauty" />
+<meta name="twitter:description" content="Every launch, stockout, review spike and marketing move — across the brands you watch, in one morning brief." />
+<meta name="twitter:image" content="https://shelfsight.io/og.png" />
+
+<!-- Favicon (inline SVG, wine mark) -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cline x1='4' y1='8' x2='24' y2='8' stroke='%237A2328' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='4' y1='14' x2='17' y2='14' stroke='%237A2328' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='4' y1='20' x2='22' y2='20' stroke='%237A2328' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 
 <style>
   :root {
     --cream: #F5F1EA;
     --cream-deep: #EEE7DA;
+    --cream-dark: #E8DFCE;
     --ink: #1A1410;
     --ink-soft: #3D342B;
     --taupe: #8A7F73;
+    --taupe-light: #B5AA9B;
     --wine: #7A2328;
     --wine-soft: #9B3135;
     --coral: #E8A87C;
+    --sage: #8B9D7F;
     --hairline: rgba(26, 20, 16, 0.12);
+    --hairline-strong: rgba(26, 20, 16, 0.2);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -66,14 +94,15 @@
     position: sticky;
     top: 0;
     z-index: 50;
-    background: var(--cream);
     border-bottom: 1px solid var(--hairline);
+    backdrop-filter: saturate(180%) blur(10px);
+    background: rgba(245, 241, 234, 0.88);
   }
   .nav-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 22px 32px;
+    padding: 20px 32px;
     max-width: 1280px;
     margin: 0 auto;
   }
@@ -86,21 +115,19 @@
     align-items: center;
     gap: 10px;
   }
-  .logo-dot {
-    width: 10px;
-    height: 10px;
-    background: var(--wine);
-    border-radius: 50%;
-    display: inline-block;
+  .logo-mark {
+    width: 20px;
+    height: 20px;
   }
   .nav-links {
     display: flex;
     align-items: center;
-    gap: 40px;
+    gap: 36px;
     font-size: 15px;
   }
-  .nav-links a { color: var(--ink-soft); }
+  .nav-links a { color: var(--ink-soft); transition: color 0.15s; }
   .nav-links a:hover { color: var(--wine); }
+
   .btn {
     display: inline-block;
     padding: 12px 22px;
@@ -112,9 +139,11 @@
     font-size: 15px;
     font-weight: 500;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.1s;
+    letter-spacing: -0.005em;
   }
   .btn:hover { background: var(--wine); }
+  .btn:active { transform: translateY(1px); }
   .btn-ghost {
     background: transparent;
     color: var(--ink);
@@ -125,18 +154,19 @@
 
   /* ---------------- HERO ---------------- */
   .hero {
-    padding: 90px 0 120px;
+    padding: 80px 0 120px;
     position: relative;
   }
   .hero-grid {
     display: grid;
-    grid-template-columns: 1.3fr 1fr;
+    grid-template-columns: 1.25fr 1fr;
     gap: 80px;
     align-items: end;
   }
   .hero-headline {
-    font-size: clamp(54px, 8vw, 104px);
+    font-size: clamp(52px, 7.5vw, 96px);
     color: var(--ink);
+    margin-top: 20px;
   }
   .hero-headline em {
     font-style: italic;
@@ -145,6 +175,899 @@
   .hero-sub {
     font-size: 19px;
     color: var(--ink-soft);
-    max-width: 520px;
+    max-width: 560px;
     margin: 32px 0 40px;
     line-height: 1.5;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .hero-trust {
+    font-size: 14px;
+    color: var(--taupe);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-trust::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: var(--wine);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* Hero sidebar — sample morning brief */
+  .brief-card {
+    background: #fff;
+    border: 1px solid var(--hairline);
+    border-radius: 8px;
+    padding: 28px 28px 20px;
+    box-shadow: 0 1px 2px rgba(26,20,16,0.04), 0 24px 60px -24px rgba(26,20,16,0.22);
+    font-size: 14px;
+    position: relative;
+    transform: rotate(-0.8deg);
+  }
+  .brief-card::before {
+    content: "MON 20 APR · 06:42";
+    position: absolute;
+    top: -11px;
+    left: 28px;
+    background: var(--wine);
+    color: var(--cream);
+    padding: 3px 10px;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+  .brief-card h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 24px;
+    margin-bottom: 6px;
+    padding-top: 8px;
+    letter-spacing: -0.02em;
+  }
+  .brief-card .who {
+    color: var(--taupe);
+    margin-bottom: 18px;
+    font-size: 13px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .brief-item {
+    padding: 12px 0;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 12px;
+    align-items: start;
+    border-top: 1px solid var(--hairline);
+  }
+  .brief-item:first-of-type { border-top: none; }
+  .brief-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+  .brief-dot.red { background: var(--wine); }
+  .brief-dot.orange { background: var(--coral); }
+  .brief-dot.sage { background: var(--sage); }
+  .brief-dot.taupe { background: var(--taupe); }
+  .brief-item strong {
+    font-weight: 600;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 3px;
+    line-height: 1.3;
+  }
+  .brief-item .note {
+    color: var(--ink-soft);
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+  .brief-item .action {
+    font-size: 11px;
+    color: var(--wine);
+    font-weight: 500;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding-top: 2px;
+  }
+  .brief-footer {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--hairline);
+    font-size: 12px;
+    color: var(--taupe);
+    font-style: italic;
+  }
+
+  /* ---------------- PROBLEM ---------------- */
+  .problem {
+    padding: 100px 0;
+    border-top: 1px solid var(--hairline);
+    background: var(--cream-deep);
+  }
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+  }
+  .problem h2 {
+    font-size: 48px;
+    margin-top: 16px;
+    line-height: 1.02;
+  }
+  .problem h2 em { font-style: italic; color: var(--wine); }
+  .problem-scenarios {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+  .scenario {
+    padding-left: 28px;
+    border-left: 2px solid var(--wine);
+  }
+  .scenario-num {
+    font-family: 'Fraunces', serif;
+    font-size: 14px;
+    color: var(--wine);
+    font-style: italic;
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+  }
+  .scenario p {
+    font-size: 19px;
+    color: var(--ink);
+    line-height: 1.45;
+  }
+
+  /* ---------------- HOW IT WORKS ---------------- */
+  .how {
+    padding: 120px 0;
+  }
+  .how-header {
+    max-width: 760px;
+    margin-bottom: 72px;
+  }
+  .how-header h2 {
+    font-size: clamp(42px, 5vw, 60px);
+    margin-top: 16px;
+    line-height: 1.02;
+  }
+  .how-header h2 em { font-style: italic; color: var(--wine); }
+  .how-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    border-top: 1px solid var(--hairline);
+    padding-top: 48px;
+  }
+  .step {
+    position: relative;
+  }
+  .step-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 44px;
+    color: var(--wine);
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .step h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 22px;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .step p {
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  /* ---------------- WHY THIS EXISTS ---------------- */
+  .why {
+    padding: 120px 0;
+    background: var(--cream-deep);
+    border-top: 1px solid var(--hairline);
+  }
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 100px;
+    align-items: start;
+  }
+  .why-headline {
+    font-size: clamp(36px, 4.5vw, 54px);
+    margin-top: 20px;
+    line-height: 1.05;
+  }
+  .why-headline em { font-style: italic; color: var(--wine); }
+  .why-body {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    letter-spacing: -0.005em;
+  }
+  .why-body p + p { margin-top: 24px; }
+  .why-body strong {
+    color: var(--ink);
+    font-weight: 500;
+    font-style: italic;
+  }
+  .why-sign {
+    margin-top: 40px;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 13px;
+    color: var(--taupe);
+    letter-spacing: 0.04em;
+  }
+
+  /* ---------------- PRICING ---------------- */
+  .pricing {
+    padding: 120px 0;
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .pricing .eyebrow { color: var(--coral); }
+  .pricing-header {
+    text-align: center;
+    margin-bottom: 72px;
+  }
+  .pricing-header h2 {
+    font-size: clamp(42px, 5vw, 56px);
+    margin-top: 16px;
+    color: var(--cream);
+    line-height: 1.05;
+  }
+  .pricing-header h2 em { color: var(--coral); font-style: italic; }
+  .pricing-header p {
+    color: rgba(245, 241, 234, 0.6);
+    max-width: 560px;
+    margin: 20px auto 0;
+  }
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .tier {
+    background: rgba(245, 241, 234, 0.04);
+    border: 1px solid rgba(245, 241, 234, 0.12);
+    border-radius: 6px;
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+  }
+  .tier.featured {
+    background: var(--cream);
+    color: var(--ink);
+    border: none;
+    transform: translateY(-12px);
+    position: relative;
+  }
+  .tier.featured::before {
+    content: "Most chosen";
+    position: absolute;
+    top: -13px;
+    left: 32px;
+    background: var(--wine);
+    color: var(--cream);
+    padding: 4px 12px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border-radius: 2px;
+  }
+  .tier-name {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 500;
+  }
+  .tier-price {
+    font-family: 'Fraunces', serif;
+    font-size: 56px;
+    margin: 16px 0 4px;
+    letter-spacing: -0.03em;
+  }
+  .tier-price span { font-size: 18px; color: inherit; opacity: 0.6; }
+  .tier-blurb {
+    font-size: 14px;
+    opacity: 0.7;
+    margin-bottom: 28px;
+    min-height: 40px;
+  }
+  .tier ul {
+    list-style: none;
+    margin-bottom: 32px;
+    flex-grow: 1;
+  }
+  .tier li {
+    padding: 10px 0;
+    font-size: 14.5px;
+    border-bottom: 1px solid rgba(245, 241, 234, 0.08);
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    line-height: 1.4;
+  }
+  .tier.featured li { border-bottom-color: var(--hairline); }
+  .tier li::before {
+    content: "→";
+    color: var(--coral);
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  .tier.featured li::before { color: var(--wine); }
+  .tier .btn {
+    width: 100%;
+    text-align: center;
+    background: var(--cream);
+    color: var(--ink);
+  }
+  .tier.featured .btn {
+    background: var(--ink);
+    color: var(--cream);
+  }
+
+  /* ---------------- FAQ ---------------- */
+  .faq {
+    padding: 120px 0;
+  }
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+  }
+  .faq h2 {
+    font-size: clamp(42px, 5vw, 56px);
+    margin-top: 16px;
+    line-height: 1.05;
+  }
+  .faq h2 em { font-style: italic; color: var(--wine); }
+  .faq-list {
+    border-top: 1px solid var(--hairline);
+  }
+  details {
+    border-bottom: 1px solid var(--hairline);
+    padding: 22px 0;
+  }
+  summary {
+    cursor: pointer;
+    font-family: 'Fraunces', serif;
+    font-size: 21px;
+    font-weight: 500;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: "+";
+    font-size: 28px;
+    color: var(--wine);
+    font-weight: 300;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+    line-height: 0.9;
+  }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p {
+    margin-top: 16px;
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 680px;
+  }
+
+  /* ---------------- FINAL CTA ---------------- */
+  .final-cta {
+    padding: 140px 0 110px;
+    background: var(--cream-deep);
+    text-align: center;
+    border-top: 1px solid var(--hairline);
+  }
+  .final-cta .eyebrow { color: var(--wine); }
+  .final-cta h2 {
+    font-size: clamp(40px, 6vw, 72px);
+    max-width: 920px;
+    margin: 20px auto 24px;
+    line-height: 1.02;
+  }
+  .final-cta h2 em {
+    font-style: italic;
+    color: var(--wine);
+  }
+  .final-cta > .container > p {
+    color: var(--ink-soft);
+    max-width: 560px;
+    margin: 0 auto 40px;
+    font-size: 18px;
+    line-height: 1.55;
+  }
+  .email-form {
+    max-width: 460px;
+    margin: 0 auto;
+    display: flex;
+    gap: 8px;
+  }
+  .email-form input[type="email"] {
+    flex: 1;
+    padding: 16px 18px;
+    border: 1px solid var(--ink);
+    background: var(--cream);
+    font-family: inherit;
+    font-size: 15px;
+    border-radius: 4px;
+    color: var(--ink);
+  }
+  .email-form input[type="email"]:focus {
+    outline: 2px solid var(--wine);
+    outline-offset: -1px;
+  }
+  .email-form .btn {
+    border-radius: 4px;
+    padding: 16px 24px;
+    white-space: nowrap;
+  }
+  .form-note {
+    font-size: 13px;
+    color: var(--taupe);
+    margin-top: 16px;
+  }
+
+  footer {
+    padding: 40px 0;
+    border-top: 1px solid var(--hairline);
+    font-size: 14px;
+    color: var(--taupe);
+  }
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .footer-left .logo-mark {
+    width: 16px;
+    height: 16px;
+    opacity: 0.55;
+  }
+
+  /* ---------------- RESPONSIVE ---------------- */
+  @media (max-width: 900px) {
+    .hero { padding: 48px 0 72px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 56px; }
+    .problem { padding: 72px 0; }
+    .problem-grid, .faq-grid { grid-template-columns: 1fr; gap: 32px; }
+    .how { padding: 72px 0; }
+    .how-steps { grid-template-columns: 1fr 1fr; gap: 32px 28px; }
+    .why { padding: 72px 0; }
+    .why-grid { grid-template-columns: 1fr; gap: 32px; }
+    .why-body { font-size: 19px; }
+    .pricing { padding: 72px 0; }
+    .tiers { grid-template-columns: 1fr; max-width: 420px; }
+    .tier.featured { transform: none; }
+    .faq { padding: 72px 0; }
+    .final-cta { padding: 80px 0 64px; }
+    .nav-links a:not(.btn) { display: none; }
+    .brief-card { transform: none; }
+    summary { font-size: 19px; }
+  }
+
+  @media (max-width: 520px) {
+    .container { padding: 0 24px; }
+    .email-form { flex-direction: column; gap: 10px; }
+    .email-form .btn { padding: 14px 22px; }
+    .hero-cta { flex-direction: column; align-items: stretch; gap: 10px; }
+    .hero-cta .btn { text-align: center; }
+  }
+
+  /* ---------------- ANIMATIONS ---------------- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-headline, .hero-sub, .hero-cta, .hero-trust {
+    animation: fadeUp 0.7s cubic-bezier(.25,.8,.25,1) backwards;
+  }
+  .hero-headline { animation-delay: 0.05s; }
+  .hero-sub { animation-delay: 0.2s; }
+  .hero-cta { animation-delay: 0.35s; }
+  .hero-trust { animation-delay: 0.5s; }
+  .brief-card {
+    animation: fadeUp 0.9s cubic-bezier(.25,.8,.25,1) 0.4s backwards;
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== NAV ==================== -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <svg class="logo-mark" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <line x1="4" y1="8" x2="24" y2="8" stroke="#7A2328" stroke-width="3" stroke-linecap="round"/>
+        <line x1="4" y1="14" x2="17" y2="14" stroke="#7A2328" stroke-width="3" stroke-linecap="round"/>
+        <line x1="4" y1="20" x2="22" y2="20" stroke="#7A2328" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      Shelfsight
+    </a>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#why">Why this</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#waitlist" class="btn">Request access</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Daily intelligence for independent beauty founders</div>
+        <h1 class="display hero-headline">
+          Be first to know<br>
+          what your peers<br>
+          <em>just&nbsp;did.</em>
+        </h1>
+        <p class="hero-sub">
+          Shelfsight reads the indie beauty shelf overnight — launches, stockouts, review spikes, marketing drops, the quiet moves that Allure won't cover for weeks. By 7am, you've got the brief. By 8, you're already ahead.
+        </p>
+        <div class="hero-cta">
+          <a href="#waitlist" class="btn">Request access</a>
+          <a href="#how" class="btn btn-ghost">See how it works</a>
+        </div>
+        <div class="hero-trust">
+          Founding access rolling through spring 2026 · UK-based · Shopify-native
+        </div>
+      </div>
+
+      <!-- Sample morning brief (the hero visual) -->
+      <div class="brief-card">
+        <h3>Your morning brief</h3>
+        <div class="who">For Botanic Hill · 14 brands watched</div>
+
+        <div class="brief-item">
+          <div class="brief-dot red"></div>
+          <div>
+            <strong>Typology launched a new retinal eye serum</strong>
+            <div class="note">£24 · placed against your bestseller · Meta ads live from 04:17</div>
+          </div>
+          <div class="action">Review</div>
+        </div>
+
+        <div class="brief-item">
+          <div class="brief-dot orange"></div>
+          <div>
+            <strong>Naturium out of stock on Niacinamide 12%</strong>
+            <div class="note">Third time this quarter · typical restock window ~9 days</div>
+          </div>
+          <div class="action">Push ads</div>
+        </div>
+
+        <div class="brief-item">
+          <div class="brief-dot sage"></div>
+          <div>
+            <strong>The Ordinary's vitamin C: 47 reviews in 24h</strong>
+            <div class="note">Sentiment 88% positive · shoppers quoting "best under £15" — that's your frame</div>
+          </div>
+          <div class="action">Lean in</div>
+        </div>
+
+        <div class="brief-item">
+          <div class="brief-dot taupe"></div>
+          <div>
+            <strong>Herbivore featured in Refinery29's "spring reset"</strong>
+            <div class="note">Three SKUs linked · your bakuchiol sits in the same category · they don't have one</div>
+          </div>
+          <div class="action">Capitalise</div>
+        </div>
+
+        <div class="brief-footer">Plus 6 smaller signals. Read time: three minutes.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PROBLEM ==================== -->
+<section class="problem">
+  <div class="container">
+    <div class="problem-grid">
+      <div>
+        <div class="eyebrow">The lag</div>
+        <h2 class="display">Finding out late <em>costs you</em> every time.</h2>
+      </div>
+      <div class="problem-scenarios">
+        <div class="scenario">
+          <div class="scenario-num">i.</div>
+          <p>A direct peer launches the exact product you had on your roadmap for Q3. You find out when Glossy covers it three weeks later.</p>
+        </div>
+        <div class="scenario">
+          <div class="scenario-num">ii.</div>
+          <p>Three clean-beauty brands go viral on TikTok for the same obscure ingredient overnight. You could have been at the front of that wave — if you'd known by morning.</p>
+        </div>
+        <div class="scenario">
+          <div class="scenario-num">iii.</div>
+          <p>Your biggest peer goes out of stock on their hero SKU for eleven days. Their paid traffic has nowhere to land. You could have captured every search query they paid for. You didn't know.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== HOW IT WORKS ==================== -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="how-header">
+      <div class="eyebrow">How Shelfsight works</div>
+      <h2 class="display">Install once. Name twenty brands. Read <em>three minutes</em> every morning.</h2>
+    </div>
+
+    <div class="how-steps">
+      <div class="step">
+        <div class="step-num">i</div>
+        <h3>Install on Shopify</h3>
+        <p>One click from the App Store. We read your own catalogue first, so we know what you sell and where you sit.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">ii</div>
+        <h3>Name who to watch</h3>
+        <p>The brands you already follow religiously. The ones you check on Tuesday mornings. Direct peers, aspirational peers — up to twenty.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">iii</div>
+        <h3>We watch everything</h3>
+        <p>Launches, new SKUs, pulled products, stock levels, review count and sentiment, ad activity, press mentions, promos, price shifts. Refreshed round the clock.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">iv</div>
+        <h3>A brief by 7am</h3>
+        <p>What happened. What it means. What to do. One email. Or Slack, if you'd rather read it on the school run.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== WHY THIS EXISTS ==================== -->
+<section class="why" id="why">
+  <div class="container">
+    <div class="why-grid">
+      <div>
+        <div class="eyebrow">Why this exists</div>
+        <h2 class="display why-headline">Big beauty has always had intelligence. <em>Indie beauty got spreadsheets.</em></h2>
+      </div>
+      <div class="why-body">
+        <p>Charlotte Tilbury has Launchmetrics. Estée Lauder has Tribe Dynamics. Sephora's buyers run on Dash Hudson and proprietary shopper data the rest of us never see.</p>
+        <p>The tools that tell the biggest beauty businesses <strong>what the market is doing — every hour, every day —</strong> cost upwards of £1,500 a month, and are built for teams of ten with dedicated analysts.</p>
+        <p>The indie brand, meanwhile, is running on a Notion board, a screenshot folder, and an eleven-tab Chrome session.</p>
+        <p>Shelfsight is the first market intelligence platform built for the founder with three SKUs, a sofa office, and twenty brands they watch religiously. You deserve to know what the shelf is doing too. Before your customers. Before Allure.</p>
+        <div class="why-sign">— Built in London. Shipping spring 2026.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PRICING ==================== -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="pricing-header">
+      <div class="eyebrow">Pricing</div>
+      <h2 class="display">One price. No surprises. <em>Cancel anytime.</em></h2>
+      <p>Fourteen-day free trial on every tier. No card required to start. Founding fifty members pay the founding rate — as long as they're members.</p>
+    </div>
+
+    <div class="tiers">
+      <div class="tier">
+        <div class="tier-name">Starter</div>
+        <div class="tier-price">£39<span>/mo</span></div>
+        <div class="tier-blurb">For brands just starting to pay attention to the shelf.</div>
+        <ul>
+          <li>5 brands watched</li>
+          <li>Daily morning brief</li>
+          <li>Launch &amp; stock alerts</li>
+          <li>Review volume tracking</li>
+          <li>Email delivery · 1 Shopify store</li>
+        </ul>
+        <a href="#waitlist" class="btn">Request access</a>
+      </div>
+
+      <div class="tier featured">
+        <div class="tier-name">Brand</div>
+        <div class="tier-price">£79<span>/mo</span></div>
+        <div class="tier-blurb">For brands doing £10k–£200k per month on Shopify.</div>
+        <ul>
+          <li>20 brands watched</li>
+          <li>Daily brief + instant alerts</li>
+          <li>Review sentiment &amp; momentum</li>
+          <li>PR &amp; press monitoring</li>
+          <li>Meta &amp; TikTok ad tracking</li>
+          <li>Email + Slack · 1 Shopify store</li>
+        </ul>
+        <a href="#waitlist" class="btn">Request access</a>
+      </div>
+
+      <div class="tier">
+        <div class="tier-name">Studio</div>
+        <div class="tier-price">£149<span>/mo</span></div>
+        <div class="tier-blurb">For multi-brand holding companies and agencies.</div>
+        <ul>
+          <li>50 brands watched</li>
+          <li>Up to 3 Shopify stores</li>
+          <li>Everything in Brand</li>
+          <li>API access</li>
+          <li>White-label weekly report</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#waitlist" class="btn">Request access</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FAQ ==================== -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="faq-grid">
+      <div>
+        <div class="eyebrow">Frequently asked</div>
+        <h2 class="display">Questions, <em>answered.</em></h2>
+      </div>
+
+      <div class="faq-list">
+        <details>
+          <summary>How is this different from me just checking my competitors' sites myself?</summary>
+          <p>Three things. Speed — we catch shifts within hours, not whenever you next have a quiet Tuesday. Breadth — we watch launches, reviews, ads, press, stock, and prices simultaneously across twenty brands, which genuinely isn't doable manually once a business gets real. And curation — we surface the signals that matter (a peer's new launch placed directly against your bestseller) instead of drowning you in noise (someone changed a shipping copy paragraph).</p>
+        </details>
+        <details>
+          <summary>What does Shelfsight actually watch for me?</summary>
+          <p>Every night we re-read each brand you track: their full product catalogue (new launches, removed SKUs, edited listings, inventory levels), their review count and sentiment across Trustpilot and Google, their Meta and TikTok ad activity, press mentions in the indie beauty trade press (Beauty Independent, BeautyMatter, Cosmetics Business, Glossy), and their pricing and promotional patterns. Each morning you get a ranked summary of what actually changed and why it's worth knowing.</p>
+        </details>
+        <details>
+          <summary>How is this different from Prisync, Dash Hudson, or Launchmetrics?</summary>
+          <p>Prisync and Competera are generic price-tracking tools for mid-market retailers at £200–500/month — too narrow in signal, too expensive for indie. Dash Hudson and Launchmetrics are beauty-native but enterprise-priced at £1,500+/month, built for brand teams of ten with dedicated analysts. Shelfsight is the first intelligence product built specifically for the solo or small-team indie beauty founder — beauty-native signals, indie pricing, zero learning curve.</p>
+        </details>
+        <details>
+          <summary>What if my niche isn't mainstream skincare — say fragrance, colour, haircare, or tools?</summary>
+          <p>Shelfsight works across indie beauty regardless of category. The brands you name are the brands we watch — whether they're skincare, fragrance, colour, haircare, tools, or adjacent (supplements, intimate wellness). Founding fifty pricing is open to all indie beauty until we're full; we'll widen beyond beauty later in 2026.</p>
+        </details>
+        <details>
+          <summary>How accurate is the product matching?</summary>
+          <p>When you ask us to compare a like-for-like product across peers (a niacinamide serum, say), we match on ingredient list, category, price band, and visual similarity. Early testing shows around 94% accuracy on direct matches. You can correct any match manually from the dashboard and we learn from the correction.</p>
+        </details>
+        <details>
+          <summary>Is this legal?</summary>
+          <p>Yes. We read publicly-available storefront data — the same product, price and review information any shopper can see. We don't access private merchant systems, and we respect robots.txt directives on any site that asks to be excluded.</p>
+        </details>
+        <details>
+          <summary>Can I cancel anytime?</summary>
+          <p>Yes. Monthly billing, cancel anytime, no contracts, no exit interview. The 14-day free trial requires no card.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FINAL CTA ==================== -->
+<section class="final-cta" id="waitlist">
+  <div class="container">
+    <div class="eyebrow">Founding fifty · Founding rate · Founding say</div>
+    <h2 class="display">Be one of the first fifty <em>indie beauty brands</em> on Shelfsight.</h2>
+    <p>Founding members pay the founding rate as long as they're members, and their feedback decides what we build next. Pop your email in — we'll send the invite when it's your turn.</p>
+
+    <form class="email-form" onsubmit="handleSubmit(event)">
+      <input type="email" placeholder="you@yourbeautybrand.com" required aria-label="Email address">
+      <input type="text" name="hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;pointer-events:none" aria-hidden="true">
+      <button class="btn" type="submit">Request access</button>
+    </form>
+    <p class="form-note">No spam. One short update a fortnight until launch.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-left">
+      <svg class="logo-mark" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <line x1="4" y1="8" x2="24" y2="8" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <line x1="4" y1="14" x2="17" y2="14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <line x1="4" y1="20" x2="22" y2="20" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <span>© 2026 Shelfsight · Built in London</span>
+    </div>
+    <div>
+      <a href="mailto:hello@shelfsight.io">hello@shelfsight.io</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---- Supabase config (publishable key = safe to expose in browser) ----
+  const SUPABASE_URL = 'https://tgscdheynoelqyapmfwq.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_knP047_AvmywQnUuq1b03g_c1Tu0UsE';
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const input = form.querySelector('input[type="email"]');
+    const honeypot = form.querySelector('input[name="hp"]');
+    const btn = form.querySelector('button');
+
+    if (honeypot && honeypot.value) {
+      btn.textContent = 'Welcome aboard';
+      return;
+    }
+
+    const email = input.value.trim().toLowerCase();
+    if (!email) return;
+
+    btn.disabled = true;
+    btn.textContent = 'Saving...';
+
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({
+          email: email,
+          source: 'landing_page_v2',
+          metadata: {
+            referrer: document.referrer || null,
+            ua: navigator.userAgent.slice(0, 200)
+          }
+        })
+      });
+
+      if (res.ok || res.status === 409) {
+        btn.textContent = 'Welcome aboard';
+        btn.style.background = 'var(--wine)';
+        input.value = '';
+        input.placeholder = 'See you soon.';
+      } else {
+        const errorBody = await res.text();
+        console.error('Waitlist error:', res.status, errorBody);
+        btn.textContent = 'Try again?';
+        btn.disabled = false;
+      }
+    } catch (err) {
+      console.error('Network error:', err);
+      btn.textContent = 'Try again?';
+      btn.disabled = false;
+    }
+  }
+</script>
+
+</body>
+</html>
